@@ -9,7 +9,7 @@ description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
 requires-python = ">={{ cookiecutter.python_version }}"
 license = {%- if cookiecutter.open_source_license != 'Proprietary' %} { text = "{{ cookiecutter.open_source_license }}" }
-{%- else %} "Proprietary"
+{%- else %} { text = "Proprietary" }
 {%- endif %}
 authors = [
     { name = "{{ cookiecutter.full_name }}", email = "{{ cookiecutter.email }}" },
