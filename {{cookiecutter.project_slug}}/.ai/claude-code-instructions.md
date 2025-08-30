@@ -10,7 +10,7 @@
 |-----------|-----------------|
 | Simple bug fix | `quick-reference.md` only |
 | Writing tests | `quick-reference.md` + `standards/testing.md` |
-| New feature | `quick-reference.md` + `architecture-decisions.md` |
+| New feature | `quick-reference.md` + `architecture-decisions.md` index + relevant ADRs |
 | Refactoring | `quick-reference.md` + `standards/python-style.md` |
 | Major changes | All relevant `.ai/` files |
 
@@ -23,7 +23,7 @@
 
 ### Before Making Changes
 1. Review the project structure in `project-context.md`
-2. Check `architecture-decisions.md` for relevant ADRs
+2. Check `architecture-decisions.md` index, then read relevant ADRs in `adrs/`
 3. Follow the standards in `coding-standards.md`
 
 ### Common Tasks
@@ -190,7 +190,7 @@ make run
 ### Getting Help
 
 If you need to:
-- Understand a design decision → Check `.ai/architecture-decisions.md`
+- Understand a design decision → Check `.ai/architecture-decisions.md` index and relevant ADRs
 - Know the code style → Check `.ai/coding-standards.md`  
 - Find project info → Check `.ai/project-context.md`
 - Run a command → Try `make help`

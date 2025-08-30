@@ -36,6 +36,30 @@
 
 ## Advanced Patterns
 
+### Composition Over Inheritance
+```python
+# Prefer this - using composition
+class EmailService:
+    def __init__(self, smtp_client: SMTPClient):
+        self._client = smtp_client
+    
+    def send(self, message: Message) -> None:
+        self._client.send(message.to_dict())
+
+# With Protocol for interfaces
+from typing import Protocol
+
+class MessageSender(Protocol):
+    def send(self, message: Message) -> None: ...
+
+class EmailService:  # No inheritance needed
+    def __init__(self, smtp_client: SMTPClient):
+        self._client = smtp_client
+    
+    def send(self, message: Message) -> None:
+        self._client.send(message.to_dict())
+```
+
 ### Dependency Injection
 ```python
 def create_service(db: Database = Depends(get_db)):

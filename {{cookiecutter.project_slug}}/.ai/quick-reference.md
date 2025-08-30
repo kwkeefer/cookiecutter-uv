@@ -33,6 +33,20 @@ make test      # Run tests
 
 ### Common Patterns
 
+**Composition Over Inheritance** (See ADR-009):
+```python
+from typing import Protocol
+
+# Define interface with Protocol
+class Repository(Protocol):
+    def get(self, id: str) -> Model: ...
+
+# Use composition
+class Service:
+    def __init__(self, repo: Repository):
+        self._repo = repo
+```
+
 **Error Handling**:
 ```python
 # Custom exceptions for domain errors
@@ -53,7 +67,7 @@ def process(data: dict[str, Any]) -> Optional[Result]:
 ## Task-Specific Guides
 
 - **Writing tests?** → See `.ai/standards/testing.md`
-- **Adding feature?** → Check `.ai/architecture-decisions.md` first
+- **Adding feature?** → Check `.ai/architecture-decisions.md` index for relevant ADRs
 - **Refactoring?** → Follow patterns in `.ai/standards/python-style.md`
 - **Git commits?** → Format in `.ai/standards/git-commits.md`
 

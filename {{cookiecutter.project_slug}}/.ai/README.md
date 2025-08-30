@@ -6,7 +6,8 @@ This directory contains documentation specifically designed to help AI assistant
 
 - **`project-context.md`** - Overview of the project, its structure, and current state
 - **`coding-standards.md`** - Code style guidelines and conventions to follow
-- **`architecture-decisions.md`** - Record of important architectural decisions (ADRs)
+- **`architecture-decisions.md`** - Index of architectural decisions (ADRs)
+- **`adrs/`** - Individual ADR documents with detailed decisions
 - **`claude-code-instructions.md`** - Specific instructions for working with Claude Code
 
 ## How to Use These Files
@@ -21,7 +22,7 @@ When working with AI assistants:
 When working on this project:
 1. Start by reading `project-context.md` for an overview
 2. Consult `coding-standards.md` before writing code
-3. Check `architecture-decisions.md` for design rationale
+3. Check `architecture-decisions.md` for ADR index, then read specific ADRs in `adrs/`
 4. Follow specific instructions in `claude-code-instructions.md`
 
 ## Maintaining These Documents
@@ -57,7 +58,7 @@ When working on this project:
 "Following the patterns in .ai/coding-standards.md, implement..."
 
 # When making architectural changes
-"Update .ai/architecture-decisions.md with an ADR for this change"
+"Create a new ADR in .ai/adrs/ and update the index in architecture-decisions.md"
 ```
 
 ## Contributing

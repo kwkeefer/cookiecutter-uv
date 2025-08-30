@@ -1,199 +1,45 @@
 # Architecture Decisions for {{ cookiecutter.project_name }}
 
-## ADR-001: Use src Layout for Python Package
+This document provides a quick reference to all architectural decisions. For detailed information, see the individual ADR files in `.ai/adrs/`.
 
-**Status**: Accepted  
-**Date**: {% now 'local', '%Y-%m-%d' %}  
+## Quick Reference
 
-### Context
-Need to organize Python package structure in a way that prevents accidental imports of development code and ensures proper testing isolation.
+| ADR | Title | Status | One-line Summary |
+|-----|-------|--------|-----------------|
+| [001](adrs/001-src-layout.md) | Use src Layout | Accepted | Organize code under `src/` for proper isolation |
+| [002](adrs/002-mirror-test-structure.md) | Mirror Test Structure | Accepted | Tests mirror source structure for easy discovery |
+| [003](adrs/003-uv-dependency-management.md) | Use uv for Dependencies | Accepted | Fast, modern Python package management with uv |
+| [004](adrs/004-makefile-interface.md) | Makefile Interface | Accepted | Consistent developer interface via Make commands |
+| [005](adrs/005-cli-framework.md) | CLI Framework Choice | Accepted | CLI implementation approach for the project |
+| [006](adrs/006-module-organization.md) | Module Organization | Proposed | Separate core, api, db, and utils modules |
+| [007](adrs/007-configuration-management.md) | Configuration Management | Proposed | Environment variables for secrets, config files for settings |
+| [008](adrs/008-error-handling.md) | Error Handling Strategy | Proposed | Custom exceptions with meaningful messages |
+| [009](adrs/009-composition-over-inheritance.md) | Composition Over Inheritance | Accepted | Use composition and Protocol for flexibility |
+| [010](adrs/010-deep-modules.md) | Prefer Deep Modules | Accepted | Fewer files with rich functionality over many shallow files |
+| [011](adrs/011-isolate-frameworks.md) | Isolate Framework Dependencies | Accepted | Keep business logic framework-agnostic |
+| [012](adrs/012-self-descriptive-codes.md) | Self-Descriptive Status Codes | Accepted | Human-readable strings over numeric codes |
+| [013](adrs/013-limit-nesting.md) | Limit Nested Control Flow | Accepted | Max 2 levels of nesting for readability |
 
-### Decision
-Use `src/` layout where all package code lives under `src/{{ cookiecutter.package_name }}/`.
+## Cognitive Load Principles
 
-### Consequences
-- ✅ Prevents importing from the development directory
-- ✅ Clear separation between source and tests
-- ✅ Better compatibility with modern Python tooling
-- ⚠️ Requires explicit PYTHONPATH configuration in some IDEs
+ADRs 010-013 are based on reducing cognitive load from [zakirullin/cognitive-load](https://github.com/zakirullin/cognitive-load).
 
----
+## How to Use This Document
 
-## ADR-002: Mirror Test Structure to Source
+1. **For LLMs/AI Assistants**: Start with this index, then read specific ADR files as needed
+2. **For Developers**: Review relevant ADRs before making architectural changes
+3. **For New Team Members**: Read ADRs 001-004 first for project setup
 
-**Status**: Accepted  
-**Date**: {% now 'local', '%Y-%m-%d' %}  
+## Adding New ADRs
 
-### Context
-Tests need to be organized in a way that makes it easy to find the tests for any given module.
+1. Copy `adrs/template.md` to `adrs/XXX-brief-name.md`
+2. Fill in the template
+3. Update this index table
+4. Set status to "Proposed" until team review
 
-### Decision
-Mirror the source structure in tests/ directory rather than separating by test type (unit/integration).
+## Status Definitions
 
-### Consequences
-- ✅ Easy to locate tests for any module
-- ✅ Natural organization as project grows
-- ✅ Can still use markers for test categorization
-- ⚠️ Integration tests mixed with unit tests in same directories
-
----
-
-## ADR-003: Use uv for Dependency Management
-
-**Status**: Accepted  
-**Date**: {% now 'local', '%Y-%m-%d' %}  
-
-### Context
-Need a fast, reliable Python package manager that supports modern workflows.
-
-### Decision
-Use uv instead of pip/poetry/pipenv for all dependency management.
-
-### Consequences
-- ✅ Extremely fast dependency resolution
-- ✅ Built-in virtual environment management  
-- ✅ Compatible with pip requirements
-- ⚠️ Newer tool with smaller ecosystem
-
----
-
-## ADR-004: Makefile as Primary Developer Interface
-
-**Status**: Accepted  
-**Date**: {% now 'local', '%Y-%m-%d' %}  
-
-### Context
-Developers need a consistent interface for common tasks regardless of their familiarity with Python tooling.
-
-### Decision
-Provide a Makefile with all common development tasks.
-
-### Consequences
-- ✅ Universal interface across different environments
-- ✅ Self-documenting with help target
-- ✅ Composable commands
-- ⚠️ Requires make to be installed (usually available)
-
----
-
-{%- if cookiecutter.cli_framework != 'none' %}
-
-## ADR-005: {{ cookiecutter.cli_framework|title }} for CLI Framework
-
-**Status**: Accepted  
-**Date**: {% now 'local', '%Y-%m-%d' %}  
-
-### Context
-Project requires a command-line interface for user interaction.
-
-### Decision
-Use {{ cookiecutter.cli_framework }} as the CLI framework.
-
-### Consequences
-{%- if cookiecutter.cli_framework == 'click' %}
-- ✅ Mature, feature-rich framework
-- ✅ Excellent documentation and community
-- ✅ Decorator-based API
-- ⚠️ Additional dependency
-{%- elif cookiecutter.cli_framework == 'typer' %}
-- ✅ Modern, type-hint based
-- ✅ Automatic help generation
-- ✅ Rich terminal output support
-- ⚠️ Newer framework
-{%- elif cookiecutter.cli_framework == 'argparse' %}
-- ✅ Standard library, no dependencies
-- ✅ Well-documented
-- ⚠️ More verbose than alternatives
-- ⚠️ Less feature-rich
-{%- endif %}
-
----
-{%- endif %}
-
-## ADR-006: Module Organization
-
-**Status**: Proposed  
-**Date**: {% now 'local', '%Y-%m-%d' %}  
-
-### Context
-Need clear boundaries between different aspects of the application.
-
-### Decision
-Organize code into four main modules:
-- `core/` - Business logic and domain models
-- `api/` - External interfaces (REST, GraphQL, etc.)
-- `db/` - Database models and queries
-- `utils/` - Shared utilities and helpers
-
-### Consequences
-- ✅ Clear separation of concerns
-- ✅ Easy to understand project structure
-- ✅ Prevents circular dependencies
-- ⚠️ May need adjustment based on project needs
-
----
-
-## ADR-007: Configuration Management
-
-**Status**: Proposed  
-**Date**: {% now 'local', '%Y-%m-%d' %}  
-
-### Context
-Need a way to manage configuration across different environments.
-
-### Decision
-- Use environment variables for secrets
-- Use `config/` directory for non-secret configuration
-- Support `.env` files for local development
-
-### Consequences
-- ✅ Secrets never in version control
-- ✅ Easy deployment configuration
-- ✅ Local development convenience
-- ⚠️ Need to document all environment variables
-
----
-
-## ADR-008: Error Handling Strategy
-
-**Status**: Proposed  
-**Date**: {% now 'local', '%Y-%m-%d' %}  
-
-### Context
-Need consistent error handling across the application.
-
-### Decision
-- Use custom exception classes for domain errors
-- Let unexpected exceptions bubble up
-- Log errors with appropriate context
-- Return meaningful error messages to users
-
-### Consequences
-- ✅ Predictable error handling
-- ✅ Good debugging information
-- ✅ Clean error messages for users
-- ⚠️ Requires discipline to maintain
-
----
-
-## ADR Template
-
-## ADR-XXX: [Decision Title]
-
-**Status**: [Proposed|Accepted|Deprecated|Superseded]  
-**Date**: YYYY-MM-DD  
-
-### Context
-[Describe the issue motivating this decision]
-
-### Decision
-[Describe the decision and rationale]
-
-### Consequences
-- ✅ [Positive consequence]
-- ⚠️ [Neutral or trade-off]
-- ❌ [Negative consequence]
-
-### Alternatives Considered
-- [Alternative 1]: [Why not chosen]
-- [Alternative 2]: [Why not chosen]
+- **Proposed**: Under consideration
+- **Accepted**: Approved and in effect
+- **Deprecated**: No longer recommended
+- **Superseded**: Replaced by another ADR
