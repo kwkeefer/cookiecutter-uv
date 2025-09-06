@@ -78,7 +78,7 @@ def generate_fresh_template(settings: Dict[str, str]) -> Path:
     
     try:
         subprocess.run([
-            "uv", "run", "cookiecutter", "--no-input", TEMPLATE_REPO,
+            "uvx", "cookiecutter", "--no-input", TEMPLATE_REPO,
             f"project_name={settings['project_name']}",
             f"project_slug={settings['project_slug']}",
             "use_claude_agents=yes"
@@ -90,7 +90,7 @@ def generate_fresh_template(settings: Dict[str, str]) -> Path:
         console.print(f"❌ Error generating template: {e}", style="red")
         sys.exit(1)
     except FileNotFoundError:
-        console.print("❌ cookiecutter not found. Install with: uv add --dev cookiecutter", style="red")
+        console.print("❌ cookiecutter not found. Make sure uvx is available", style="red")
         sys.exit(1)
 
 
