@@ -41,7 +41,24 @@ format: ## Format code with ruff
 	uv run ruff check --fix $(SRC_DIR) $(TEST_DIR)
 
 typecheck: ## Run type checking with mypy
-	uv run mypy $(SRC_DIR)
+	uv run mypy --strict --ignore-missing-imports $(SRC_DIR)
+
+{%- if cookiecutter.use_pre_commit == 'yes' %}
+
+pre-commit: ## Run all pre-commit hooks on all files
+	uv run pre-commit run --all-files
+
+pre-commit-install: ## Install pre-commit hooks
+	uv run pre-commit install
+
+{%- endif %}
+
+{%- if cookiecutter.use_claude_agents == 'yes' %}
+
+sync-ai: ## Update .ai/ and .claude/ configuration from template
+	uv run scripts/update_ai_config.py
+
+{%- endif %}
 
 clean: ## Clean up generated files
 	rm -rf build/

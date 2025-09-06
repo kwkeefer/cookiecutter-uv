@@ -3,10 +3,11 @@
 ## Essential Rules (Read This First!)
 
 ### Code Style
+- **FOLLOW PEP 8** - All imports at top of file, proper spacing, etc.
 - **Line length**: 88 chars max
-- **Imports**: stdlib → third-party → local (alphabetical)
+- **Imports**: stdlib → third-party → local (alphabetical), ALL AT TOP
 - **Naming**: `ClassName`, `function_name`, `CONSTANT_NAME`
-- **Always**: Use type hints, write docstrings for public functions
+- **Always**: Complete type hints (no `Any` shortcuts), write docstrings for public functions
 
 ### Project Structure
 ```
@@ -58,9 +59,16 @@ except SpecificError as e:
     raise
 ```
 
-**Type Hints**:
+**Type Hints** (NO shortcuts - proper types from start):
 ```python
+from typing import Optional
+from collections.abc import Sequence
+
 def process(data: dict[str, Any]) -> Optional[Result]:
+    ...
+
+# Use specific types, not Any when possible
+def handle_items(items: Sequence[Item]) -> list[ProcessedItem]:
     ...
 ```
 
@@ -80,13 +88,14 @@ def process(data: dict[str, Any]) -> Optional[Result]:
 | Test coverage | `make test-cov` |
 | Format code | `make format` |
 | Add dependency | `uv add package` |
+| Run Python | `uv run python` or `uv run python script.py` |
 {%- if cookiecutter.cli_framework != 'none' %}
 | Run CLI | `make run` |
 {%- endif %}
 
 ## Don'ts
 - ❌ Hardcode secrets
-- ❌ Ignore type hints  
+- ❌ Use `Any` type (be specific)
 - ❌ Skip tests
 - ❌ Files >500 lines
 - ❌ Commit without formatting

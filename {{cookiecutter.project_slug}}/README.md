@@ -21,6 +21,9 @@
 {%- if cookiecutter.use_pre_commit == 'yes' %}
 - Pre-commit hooks for code quality
 {%- endif %}
+{%- if cookiecutter.use_claude_agents == 'yes' %}
+- Claude Code agents for automated code review
+{%- endif %}
 
 ## Installation
 
@@ -178,5 +181,5 @@ This project is proprietary software. All rights reserved.
 
 ## Acknowledgments
 
-- Built with [cookiecutter-python-uv](https://github.com/yourusername/cookiecutter-python-uv)
+- Built with [cookiecutter-uv](https://github.com/{{ cookiecutter.github_username }}/cookiecutter-uv)
 - Package management by [uv](https://github.com/astral-sh/uv)
