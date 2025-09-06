@@ -1,4 +1,4 @@
-{%- if cookiecutter.use_claude_agents == 'yes' %}
+{%- if cookiecutter.use_claude_agents == 'yes' -%}
 ---
 name: code-reviewer
 description: Expert code reviewer focused on Python best practices, security, and maintainability
