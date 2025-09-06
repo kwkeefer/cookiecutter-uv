@@ -76,6 +76,9 @@
 - `pyproject.toml` - Project configuration and dependencies
 - `Makefile` - Development automation
 - `.ai/` - AI assistant instructions and context
+{%- if cookiecutter.use_claude_agents == 'yes' %}
+- `.claude/` - Claude Code agents and configuration
+{%- endif %}
 - `tests/conftest.py` - Shared test fixtures
 
 ## Notes for AI Assistants
@@ -85,3 +88,7 @@
 - Follow existing code style and patterns
 - Run `make format` and `make lint` before committing
 - Update this file when making significant architectural changes
+{%- if cookiecutter.use_claude_agents == 'yes' %}
+- Claude Code users: Check `.claude/agents/` for specialized agent instructions
+- Both `.ai/` and `.claude/` directories contain important context
+{%- endif %}
