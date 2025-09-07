@@ -29,31 +29,30 @@ A modern Python project template using [uv](https://github.com/astral-sh/uv) for
 ### Prerequisites
 
 - Python 3.8 or higher
-- [cookiecutter](https://github.com/cookiecutter/cookiecutter)
-- [uv](https://github.com/astral-sh/uv) (recommended, will be prompted to install if missing)
+- [uv](https://github.com/astral-sh/uv) (for uvx command)
 
-### Installation
+### Installation & Usage
+
+The easiest way to use this template is with `uvx` (no installation required):
 
 ```bash
-# Install cookiecutter if you haven't already
+# Generate a new project directly with uvx
+uvx cookiecutter https://github.com/kwkeefer/cookiecutter-uv
+
+# Or if you've cloned the repository locally
+uvx cookiecutter /path/to/cookiecutter-uv
+```
+
+Alternative installation methods:
+
+```bash
+# Traditional pip install
 pip install cookiecutter
+cookiecutter https://github.com/kwkeefer/cookiecutter-uv
 
-# Or with uv
-uv pip install cookiecutter
-```
-
-### Usage
-
-Generate a new project:
-
-```bash
-cookiecutter https://github.com/yourusername/cookiecutter-uv
-```
-
-Or use it locally:
-
-```bash
-cookiecutter /path/to/cookiecutter-uv
+# Or with uv tool install (permanent installation)
+uv tool install cookiecutter
+cookiecutter https://github.com/kwkeefer/cookiecutter-uv
 ```
 
 You'll be prompted to enter values for your project:
@@ -87,6 +86,10 @@ Select cli_framework:
 4 - argparse
 Choose from 1, 2, 3, 4 [1]: 2
 Select include_example_code:
+1 - yes
+2 - no
+Choose from 1, 2 [1]: 1
+Select use_claude_agents:
 1 - yes
 2 - no
 Choose from 1, 2 [1]: 1
@@ -185,6 +188,7 @@ The generated project includes a comprehensive Makefile:
 - **GitHub Actions**: CI/CD pipeline for testing and building
 - **Pre-commit**: Git hooks for code quality checks
 - **Example Code**: Sample modules and tests to get started
+- **Claude Agents**: AI assistant configurations for better development support
 
 ### License Options
 
@@ -193,6 +197,30 @@ The generated project includes a comprehensive Makefile:
 - GPL-3.0
 - BSD-3-Clause
 - Proprietary
+
+## AI Assistant Features
+
+When `use_claude_agents` is enabled, you get:
+
+- **`.ai/` directory**: Project context, coding standards, and architecture decisions (ADRs)
+- **`.claude/agents/`**: Specialized agents (python-architect, code-reviewer, ui-designer)
+- **Update script**: `python scripts/update_ai_config.py` to sync with latest template
+
+### Quick Tips for AI Development
+
+```bash
+# Initialize with uvx (recommended)
+uvx cookiecutter https://github.com/kwkeefer/cookiecutter-uv
+
+# Tell Claude to read project context
+"Please read .ai/quick-reference.md"
+
+# Use specialized agents
+"Use the python-architect agent to design this feature"
+
+# Keep AI config updated
+python scripts/update_ai_config.py
+```
 
 ## Development
 
