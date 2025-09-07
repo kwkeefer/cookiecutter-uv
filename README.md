@@ -1,6 +1,6 @@
 # Cookiecutter Python uv
 
-A modern Python project template using [uv](https://github.com/astral-sh/uv) for dependency management, following 2024 best practices with src layout and comprehensive development tooling.
+Modern Python project template using [uv](https://github.com/astral-sh/uv) with src layout and comprehensive tooling.
 
 ## Features
 
@@ -175,107 +175,17 @@ The generated project includes a comprehensive Makefile:
 
 ## Configuration Options
 
-### CLI Frameworks
-
-- **none**: No CLI framework
-- **click**: Feature-rich CLI framework
-- **typer**: Modern CLI framework with type hints
-- **argparse**: Built-in Python argument parser
-
-### Optional Features
-
-- **Docker**: Includes Dockerfile and docker-compose.yml
-- **GitHub Actions**: CI/CD pipeline for testing and building
-- **Pre-commit**: Git hooks for code quality checks
-- **Example Code**: Sample modules and tests to get started
-- **Claude Agents**: AI assistant configurations for better development support
-
-### License Options
-
-- MIT
-- Apache-2.0
-- GPL-3.0
-- BSD-3-Clause
-- Proprietary
+**CLI Frameworks**: none, click, typer, argparse
+**Optional Features**: Docker, GitHub Actions, Pre-commit, Example Code, Claude Agents  
+**License Options**: MIT, Apache-2.0, GPL-3.0, BSD-3-Clause, Proprietary
 
 ## AI Assistant Features
 
-When `use_claude_agents` is enabled, you get:
-
-- **`.ai/` directory**: Project context, coding standards, and architecture decisions (ADRs)
-- **`.claude/agents/`**: Specialized agents (python-architect, code-reviewer, ui-designer)
-- **Update script**: `python scripts/update_ai_config.py` to sync with latest template
-
-### Quick Tips for AI Development
-
-```bash
-# Initialize with uvx (recommended)
-uvx cookiecutter https://github.com/kwkeefer/cookiecutter-uv
-
-# Tell Claude to read project context
-"Please read .ai/quick-reference.md"
-
-# Use specialized agents
-"Use the python-architect agent to design this feature"
-
-# Keep AI config updated
-python scripts/update_ai_config.py
-```
-
-## Development
-
-To contribute to this cookiecutter template:
-
-```bash
-git clone https://github.com/yourusername/cookiecutter-uv
-cd cookiecutter-uv
-
-# Test the template
-cookiecutter . --no-input
-cd my_python_project
-make dev
-make test
-```
-
-## Testing Different Configurations
-
-You can test the template with different configurations:
-
-```bash
-# Minimal setup
-cookiecutter . --no-input \
-    use_docker=no \
-    use_github_actions=no \
-    use_pre_commit=no \
-    cli_framework=none \
-    include_example_code=no
-
-# Full featured
-cookiecutter . --no-input \
-    use_docker=yes \
-    use_github_actions=yes \
-    use_pre_commit=yes \
-    cli_framework=typer \
-    include_example_code=yes
-```
+When `use_claude_agents` is enabled:
+- `.ai/` directory with project context and architecture decisions
+- `.claude/agents/` with specialized development agents
+- Update script: `python scripts/update_ai_config.py`
 
 ## License
 
-This cookiecutter template is released under the MIT License.
-
-## Acknowledgments
-
-- [uv](https://github.com/astral-sh/uv) for blazing fast Python package management
-- [cookiecutter](https://github.com/cookiecutter/cookiecutter) for project templating
-- The Python community for best practices and standards
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch
-3. Test the template with various configurations
-4. Commit your changes
-5. Push to the branch
-6. Open a Pull Request
+MIT
