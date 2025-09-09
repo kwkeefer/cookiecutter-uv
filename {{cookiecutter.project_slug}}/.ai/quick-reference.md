@@ -72,6 +72,13 @@ def handle_items(items: Sequence[Item]) -> list[ProcessedItem]:
     ...
 ```
 
+**Missing Type Stubs**: If mypy complains about missing stubs for dependencies:
+```bash
+uv add --group dev types-requests    # For requests library
+uv add --group dev types-PyYAML      # For PyYAML library
+# Or add `# type: ignore` comments for untyped libraries
+```
+
 ## Task-Specific Guides
 
 - **Writing tests?** → See `.ai/standards/testing.md`
