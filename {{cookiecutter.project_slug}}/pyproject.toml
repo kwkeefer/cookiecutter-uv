@@ -142,17 +142,23 @@ show_error_codes = true
 show_column_numbers = true
 pretty = true
 
+# Per-module overrides using TOML array of tables syntax
+[[tool.mypy.overrides]]
 # Gradually enable stricter checks for core modules
-[mypy-{{ cookiecutter.package_name }}.core.*]
+module = "{{ cookiecutter.package_name }}.core.*"
 disallow_untyped_defs = true
 
+[[tool.mypy.overrides]]
 # Enable strict checking for data models
-[mypy-{{ cookiecutter.package_name }}.models.*]
+module = "{{ cookiecutter.package_name }}.models.*"
 disallow_untyped_defs = true
 
-# Keep CLI and test code permissive for flexibility
-[mypy-{{ cookiecutter.package_name }}.cli.*]
+[[tool.mypy.overrides]]
+# Keep CLI code permissive for flexibility
+module = "{{ cookiecutter.package_name }}.cli.*"
 disallow_untyped_defs = false
 
-[mypy-tests.*]
+[[tool.mypy.overrides]]
+# Keep test code permissive for flexibility
+module = "tests.*"
 disallow_untyped_defs = false
