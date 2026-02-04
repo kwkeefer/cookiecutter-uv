@@ -22,7 +22,7 @@
 - Pre-commit hooks for code quality
 {%- endif %}
 {%- if cookiecutter.use_claude_agents == 'yes' %}
-- Claude Code agents for automated code review
+- Claude Code skills for development workflows
 {%- endif %}
 
 ## Installation
@@ -139,19 +139,12 @@ make docker-compose-down
 ├── src/
 │   └── {{ cookiecutter.package_name }}/
 │       ├── __init__.py
-│       ├── core/           # Core business logic
-│       ├── api/            # API interfaces
-│       ├── db/             # Database models and queries
-│       └── utils/          # Utility functions
+│       ├── core/           # Business logic
+│       └── utils/          # Shared helpers
 ├── tests/                  # Test suite (mirrors src structure)
 │   ├── conftest.py
-│   ├── core/
-│   ├── api/
-│   ├── db/
-│   └── utils/
+│   └── core/
 ├── docs/                   # Documentation
-├── config/                 # Configuration files
-├── scripts/                # Utility scripts
 ├── pyproject.toml          # Project configuration
 ├── Makefile                # Development commands
 └── README.md               # This file
