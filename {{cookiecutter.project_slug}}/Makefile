@@ -53,12 +53,6 @@ pre-commit-install: ## Install pre-commit hooks
 
 {%- endif %}
 
-{%- if cookiecutter.use_claude_agents == 'yes' %}
-
-sync-ai: ## Update .ai/ and .claude/ configuration from template
-	uv run scripts/update_ai_config.py
-
-{%- endif %}
 
 clean: ## Clean up generated files
 	rm -rf build/

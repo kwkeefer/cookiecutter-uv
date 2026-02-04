@@ -120,26 +120,17 @@ project-name/
 │   └── package_name/
 │       ├── __init__.py
 │       ├── cli.py           # If CLI framework selected
-│       ├── core/            # Core business logic
+│       ├── core/            # Business logic
 │       │   ├── __init__.py
 │       │   └── example.py   # If include_example_code
-│       ├── api/             # API interfaces
-│       │   └── __init__.py
-│       ├── db/              # Database modules
-│       │   └── __init__.py
-│       └── utils/           # Utility functions
+│       └── utils/           # Shared helpers
 │           └── __init__.py
 ├── tests/                   # Test suite mirroring src
 │   ├── __init__.py
 │   ├── conftest.py         # Shared fixtures
-│   ├── core/
-│   │   └── test_example.py
-│   ├── api/
-│   ├── db/
-│   └── utils/
+│   └── core/
+│       └── test_example.py
 ├── docs/                    # Documentation
-├── config/                  # Configuration files
-├── scripts/                 # Utility scripts
 ├── .github/
 │   └── workflows/
 │       └── ci.yml          # If use_github_actions
@@ -182,9 +173,9 @@ The generated project includes a comprehensive Makefile:
 ## AI Assistant Features
 
 When `use_claude_agents` is enabled:
-- `.ai/` directory with project context and architecture decisions
-- `.claude/agents/` with specialized development agents
-- Update script: `python scripts/update_ai_config.py`
+- `CLAUDE.md` with project-specific instructions (auto-loaded by Claude Code)
+- `.claude/skills/` with development workflow skills (`/review`, `/new-feature`, `/fix-bug`)
+- `docs/adrs/` with Architecture Decision Records
 
 ## License
 
